@@ -13,6 +13,7 @@ permissions:
   id-token: write
 
 # Helps avoid concurrent deployments
+concurrency:
   group: 'pages'
   cancel-in-progress: true
 
