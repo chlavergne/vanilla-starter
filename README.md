@@ -1,9 +1,9 @@
 # Vanilla JS Starter Template
 
-[![CI/CD Status](https://github.com/USERNAME/vanilla-starter/actions/workflows/deploy.yml/badge.svg)](https://github.com/USERNAME/vanilla-starter/actions/workflows/deploy.yml)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
-[![Biome](https://img.shields.io/badge/Biome-1.9-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev/)
-[![pnpm](https://img.shields.io/badge/pnpm-9.x-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![CI/CD Status](https://github.com/chlavergne/vanilla-starter/actions/workflows/deploy.yml/badge.svg)](https://github.com/chlavergne/vanilla-starter/actions/workflows/deploy.yml)
+[![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Biome](https://img.shields.io/badge/Biome-2.5-60A5FA?logo=biome&logoColor=white)](https://biomejs.dev/)
+[![pnpm](https://img.shields.io/badge/pnpm-12.x-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A lightweight, modern Vanilla JavaScript starter template designed for rapid prototyping and clean portfolio integrations. Built for fast local development, zero-bloat disk usage, and strict code quality out of the box.
@@ -26,7 +26,7 @@ A lightweight, modern Vanilla JavaScript starter template designed for rapid pro
 Clone this template without retaining its Git history using `degit`:
 
 ```bash
-npx degit USERNAME/vanilla-starter my-new-project
+npx degit chlavergne/vanilla-starter my-new-project
 cd my-new-project
 ```
 

@@ -25,7 +25,7 @@ async function run() {
     process.exit(1);
   }
 
-  // 1. Update package.json (name + remove setup script)
+  // 1. Update package.json (set new name & remove setup script)
   const pkgPath = resolve('package.json');
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
   pkg.name = repoName;
@@ -43,47 +43,46 @@ async function run() {
   );
   writeFileSync(vitePath, viteConfig);
 
-  // 3. Update README.md badges and repository placeholders
+  // 3. Update README.md (replace placeholders / original repo references)
   const readmePath = resolve('README.md');
   let readme = readFileSync(readmePath, 'utf-8');
   readme = readme
-    .replaceAll('USERNAME', githubUser)
+    .replaceAll('chlavergne', githubUser)
     .replaceAll('vanilla-starter', repoName);
   writeFileSync(readmePath, readme);
 
-  console.log('\n⚙️ Configuring Git and Lefthook hooks...');
-
-  // 4. Initialize Git repository and install Lefthook hooks
-  try {
-    execSync('git init -b main', { stdio: 'ignore' });
-    execSync('pnpm lefthook install', { stdio: 'ignore' });
-    console.log('✓ Initialized clean Git repository on branch main');
-    console.log('✓ Installed Lefthook pre-commit hooks');
-  } catch (err) {
-    console.warn('⚠️ Could not initialize Git or Lefthook:', err.message);
-  }
-
   rl.close();
 
-  // 5. Self-delete the scripts directory
+  // 4. Initialize clean Git repository and install hooks
+  console.log('\n⚙️ Configuring Git and Lefthook hooks...');
+  try {
+    execSync('git init -b main', { stdio: 'ignore' });
+    execSync('pnpm prepare', { stdio: 'ignore' });
+    console.log('✓ Initialized Git repository on branch main');
+    console.log('✓ Configured Lefthook pre-commit hooks');
+  } catch (err) {
+    console.warn('⚠️ Warning: Git or Lefthook setup failed:', err.message);
+  }
+
+  // 5. Remove the setup scripts folder
   try {
     rmSync(__dirname, { recursive: true, force: true });
     console.log('✓ Cleaned up setup scripts');
   } catch (err) {
-    console.warn('⚠️ Could not remove scripts directory automatically:', err.message);
+    console.warn('⚠️ Warning: Could not remove scripts directory automatically:', err.message);
   }
 
   // 6. Create initial commit
   try {
     execSync('git add .', { stdio: 'ignore' });
-    execSync('git commit -m "feat: initial commit with Vite, Biome, and Lefthook"', { stdio: 'ignore' });
+    execSync('git commit -m "feat: initial commit from starter template"', { stdio: 'ignore' });
     console.log('✓ Created initial Git commit');
   } catch (err) {
-    console.warn('⚠️ Could not create initial commit:', err.message);
+    console.warn('⚠️ Warning: Could not create initial commit:', err.message);
   }
 
-  console.log('\n✅ Setup completed successfully!');
-  console.log(`Ready to develop: run "pnpm dev" to start.\n`);
+  console.log('\n✅ Project initialized successfully!');
+  console.log('Ready to develop: run "pnpm dev" to start.\n');
 }
 
 run();
